@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Air Polutant Index 2013 - 2015 for Banting</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Air Polutant Index 2013 - 2015 for Banting">
+  <meta name="author" content="WCL">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Air Polutant Index 2013 - 2015 for Banting</h1>
+    <h2></h2>
+    <p>WCL<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This is a demo of recorded API readings of a place named Banting in Malaysia. The purpose is to determine which hour of a selected month and year has the highest/lowest API reading (Please note that there&#39;s no data being captured before August, 2013 and after February, 2015).</p>
+
+<p>This demo is implemented in R, shinyapps and R presentation.</p>
+
+<p>The result from user&#39;s input will be a plot demonstrating the changes on recorded API readings per hour.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>The Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The following are the code that will read the source file, date manipulation and to output a reactive result in a plot.</p>
+
+<pre><code class="r">  banting &lt;- read.csv(&quot;API_Banting.csv&quot;)
+  banting$Date &lt;- as.Date(banting$Date)
+  selected.data &lt;- banting[as.character(year(banting$Date)) == input$year &amp; as.character(month(banting$Date)) == input$month, ]  
+  ggplot(data=selected.data, aes(x=Hour, y=API))+stat_smooth(method = &quot;loess&quot;, color= &quot;red&quot;)+labs(x=&quot;Hour&quot;, y=&quot;API&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>The Reactive Output Plot</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This is the plot which consist of line that will change according to user&#39;s input.
+<img src="https://github.com/waiching/DevelopingDataProducts/tree/master/api_banting-figure/sample_plot.jpg" alt="API vs. Hour"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>How to Use the Demo</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>User will need to select the following input, in order to view the reactive output display - the changes of the API.</p>
+
+<ul>
+<li>Year</li>
+<li>Month</li>
+</ul>
+
+<p>You may look for the demo version at <a href="https://happywc.shinyapps.io/API_Banting/">https://happywc.shinyapps.io/API_Banting/</a></p>
+
+<p>Source Code located <a href="https://github.com/waiching/DevelopingDataProducts">https://github.com/waiching/DevelopingDataProducts</a></p>
+
+<p>Thank you!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The Code'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='The Reactive Output Plot'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='How to Use the Demo'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='NA'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
